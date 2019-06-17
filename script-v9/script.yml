@@ -1,0 +1,15 @@
+--- 
+- hosts: localhost 
+  become: true
+  roles: 
+    - {role: jfrog,tags: jfrog}
+    - {role: jenkins,tags: jenkins} 
+
+
+- hosts: localhost
+  become: true
+  roles:
+    - {role: gerrit,tags: gerrit}
+    - {role: gitlab,tags: gitlab} 
+    - {role: create-users,tags: create-users} 
+

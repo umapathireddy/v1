@@ -1,0 +1,38 @@
+---
+- name: insert
+  set_fact:
+    token: Q3sd89w6Qsy3hQoEpcPC
+    ip: 34.207.200.172
+- name: add users
+  shell: 'curl --request POST --header "PRIVATE-TOKEN: "{{ token }}"" --data "username={{ item.name }}" --data "password={{ item.password }}" --data "name={{ item.name }}" --data "skip_confirmation=true" --data "email={{ item.name }}@edge-core.com" http://"{{ ip }}"/api/v4/users'
+  with_items:
+      - { name: william_chiang, password: user@1234 }
+      - { name: pttch , password: user@1234 }
+      - { name: brian_lin , password: user@1234 }
+      - { name: fred_yu , password: user@1234 }
+      - { name: michael_jeng , password: user@1234 }
+      - { name: iris_hsu , password: user@1234 }
+      - { name: jerry_chang , password: user@1234 }
+      - { name: chaos_kao , password: user@1234 }
+      - { name: kason_peng , password: user@1234 }
+      - { name: kelly_chen , password: user@1234 }
+      - { name: max_chen , password: user@1234 }
+      - { name: junying_yeh , password: user@1234 }
+      - { name: sh_wang , password: user@1234 }
+      - { name: ezio_chen , password: user@1234 }
+      - { name: kh_shi , password: user@1234 }
+      - { name: peter_yu , password: user@1234 }
+      - { name: irene_pan , password: user@1234 }
+      - { name: ben_chiang , password: user@1234 }
+      - { name: gord_chen , password: user@1234 }
+      - { name: emma_lin , password: user@1234 }
+      - { name: minkang_tsai , password: user@1234 }
+      - { name: charlie_chen , password: user@1234 }
+      - { name: vincent_chiang , password: user@1234 }
+      - { name: mark_hsieh , password: user@1234 }
+      - { name: chiourung_huang , password: user@1234 }
+      - { name: cliff_lin , password: user@1234 }
+      - { name: sean_ling, password: user@1234 }
+      - { name: richard_lee , password: user@1234 }
+      - { name: sc_juang , password: user@1234 }
+      - { name: aaron_chang , password: user@1234 }

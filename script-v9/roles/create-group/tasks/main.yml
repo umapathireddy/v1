@@ -1,0 +1,9 @@
+---
+- name: insert
+  set_fact:
+    token: Q3sd89w6Qsy3hQoEpcPC
+    ip: 34.207.200.172
+- name: add group
+  shell: 'curl --request POST --header "PRIVATE-TOKEN: "{{ token }}"" --data "name={{ item.name }}" --data "path={{ item.name }}" http://"{{ ip }}"/api/v4/groups/'
+  with_items:
+      - { name: Devloper_EgdeCore }

@@ -1,0 +1,10 @@
+---
+- name: insert
+  set_fact:
+    token: Q3sd89w6Qsy3hQoEpcPC
+    ip: 34.207.200.172
+- name: add user to project
+  shell: 'curl --request POST --header "PRIVATE-TOKEN: "{{ token }}"" --data "name="{{ item.name }}""  http://"{{ ip }}"/api/v4/projects/'
+  with_items:
+      - { name: HM_Automation_Repo }
+      - { name: EdgeCore_Test_Repo }

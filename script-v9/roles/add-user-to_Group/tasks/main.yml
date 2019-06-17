@@ -1,0 +1,10 @@
+---
+- name: insert
+  set_fact:
+    token: Q3sd89w6Qsy3hQoEpcPC
+    ip: 34.207.200.172
+- name: add user to group
+  shell: 'curl --request POST --header "PRIVATE-TOKEN: "{{ token }}"" --data "name="{{ item.name }}"&user_id="{{ item.user_id }}"&access_level="{{ item.access_level }}"" http://"{{ ip }}"/api/v4/groups/"{{ item.group }}"/members'
+  with_items:
+      - { name: sc_juang, user_id: 30 , access_level: 30 , group: Egde-Core }
+     

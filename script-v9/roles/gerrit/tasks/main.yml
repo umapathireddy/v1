@@ -1,0 +1,43 @@
+---
+-
+  name: 'Install add-apt-repostory'
+  apt: 'name=openjdk-8-jdk state=present'
+-
+  name: 'Check java environment variable file is there ot not'
+  stat:
+    path: /etc/profile.d/java.sh
+  register: env_result
+-
+  name: 'Create Java environment variable file'
+  file:
+    path: /etc/profile.d/java.sh
+    state: touch
+  when: 'env_result.stat.exists == False'
+-
+  name: 'Set JAVA_HOME To the PATH'
+  lineinfile:
+    dest: /etc/profile.d/java.sh
+    line: '{{ item }}'
+  with_items:
+    - 'export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64'
+    - 'export PATH=${JAVA_HOME}/bin:${PATH}'
+-
+  name: 'Source java'
+  shell: 'source /etc/profile.d/java.sh && echo $JAVA_HOME'
+  args:
+    executable: /bin/bash
+-
+  name: 'get gerrit jar file'
+  get_url:
+    url: 'https://gerrit-releases.storage.googleapis.com/gerrit-2.15.5.war'
+    dest: /root/gerrit-2.15.5.war
+-
+  name: 'executing jar file'
+  shell: 'java -jar /root/gerrit-2.15.5.war init --batch --dev -d /gerrit_workspsce --install-all-plugins'
+-
+  name: replace
+  copy: src=gerrit.config dest=/gerrit_workspsce/etc/gerrit.config remote_src=no
+-
+  name: 'restart gerrit service'
+  shell: 'sh /gerrit_workspsce/bin/gerrit.sh restart'
+

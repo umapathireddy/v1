@@ -1,0 +1,54 @@
+---
+- name: install gitlab-ee dependencies packages
+
+  apt: pkg={{ item }} state=latest
+
+  with_items:
+
+    - curl
+
+    - openssh-server
+
+    - ca-certificates
+
+    - postfix
+
+ 
+
+- name: get gitlab-ee installer
+
+  get_url: url=https://packages.gitlab.com/install/repositories/gitlab/gitlab-ee/script.deb.sh dest=/tmp/install_gitlab-ee.sh mode="a+x"
+
+ 
+
+- name: install gitlab-ee
+
+  shell: /tmp/install_gitlab-ee.sh
+
+ 
+
+- name: install gitlab-ee package
+
+  apt: pkg={{ item }} state=latest
+
+  with_items:
+
+    - gitlab-ee
+
+ 
+
+- name: configure gitlab-ee
+
+  shell: gitlab-ctl reconfigure
+
+ 
+
+- name: start gitlab-ee
+
+  shell: sudo gitlab-ctl start
+
+ 
+
+- name: default username
+
+  debug: msg="root"

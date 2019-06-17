@@ -1,0 +1,6 @@
+---
+- name: replace
+  copy: src=jfrog.py dest=/root/jfrog.py remote_src=no
+- name: jfrog setup
+  command: "python /root/jfrog.py"
+

@@ -1,0 +1,26 @@
+---
+#- hosts: localhost
+- name: cli-setup dependency
+  apt: name=python-gitlab state=present
+#  shell: sudo apt-get install --upgrade python-gitlab
+            # all latest packages
+- name: cli-setup packages
+  shell: cd   /root/roles/roles/list_all/templates/python-gitlab && python setup.py install
+
+- name: configure gitlab config  
+  template: src=python-gitlab.cfg dest=/etc/python-gitlab.cfg
+            
+            #if token is expired change the previous token with latestin /etc/python-gitlab.cfg file
+
+- name: list all users
+  shell: sudo gitlab user list > /root/roles/roles/output/all_users.out
+            #all users are in all_users.out file
+
+- name: list all groups
+  shell: sudo gitlab group list > /root/roles/roles/output/all_groups.out
+            #all groups are in all_groups.out file
+          
+- name: list all projects
+  shell: sudo gitlab project list > /root/roles/roles/output/all_projects.out
+            #all projects are in all_projects.out file
+

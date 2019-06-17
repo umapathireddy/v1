@@ -1,0 +1,54 @@
+---
+- name: install wget
+  apt:
+    name: wget
+    state: present
+
+- name: install jdk
+  apt: name=openjdk-8-jdk state=present
+
+- name: download jenkins.repo
+  shell: " wget -q -O - https://pkg.jenkins.io/debian/jenkins.io.key | sudo apt-key add - " 
+- name: import jenkins key
+  shell: " sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'"
+- name: update repo
+  command: apt-get update -y
+- name: install jenkins
+  apt:
+    name: jenkins
+    state: present
+
+- name: Change Jenkins JAVA options
+  lineinfile:
+    dest=/etc/sysconfig/jenkins
+    regexp=^JENKINS_JAVA_OPTIONS=
+    line=JENKINS_JAVA_OPTIONS="{{jenkins.JAVA_OPTIONS}}"
+  become: true
+
+- name: start jenkins
+  systemd:
+    name: jenkins
+    state: started
+
+- name: enable jenkins
+  systemd:
+    name: jenkins
+    enabled: true
+
+- name: 
+  systemd:
+    name: jenkins
+    state: restarted 
+
+- name: configure jenkins 
+  wait_for: timeout=10
+  delegate_to: localhost
+
+  #- name: init password jenkin
+  #shell: cat /var/lib/jenkins/secrets/initialAdminPassword
+  #changed_when: false
+  #register: result
+
+  #- name: print init password jenkins
+  #debug:
+  #var: result.stdout

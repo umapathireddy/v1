@@ -1,0 +1,38 @@
+---
+- name: insert
+  set_fact:
+    token: Q3sd89w6Qsy3hQoEpcPC 
+    ip: 34.207.200.172
+- name: add user to project
+  shell: 'curl --request POST --header "PRIVATE-TOKEN: "{{ token }}"" --data "user_id="{{ item.user_id }}"&access_level="{{ item.access_level }}"" http://"{{ ip }}"/api/v4/projects/"{{ item.project_id }}"/members/' 
+  with_items:
+      - { user_id: 2 , access_level: 30 , project_id: 2 }
+      - { user_id: 3 , access_level: 30 , project_id: 2 }
+      - { user_id: 4 , access_level: 30 , project_id: 2 }
+      - { user_id: 5 , access_level: 30 , project_id: 2 }
+      - { user_id: 6 , access_level: 30 , project_id: 2 }
+      - { user_id: 7 , access_level: 30 , project_id: 2 }
+      - { user_id: 8 , access_level: 30 , project_id: 2 }
+      - { user_id: 9 , access_level: 30 , project_id: 2 }
+      - { user_id: 10 , access_level: 30 , project_id: 2 }
+      - { user_id: 11 , access_level: 30 , project_id: 2 }
+      - { user_id: 12 , access_level: 30 , project_id: 2 }
+      - { user_id: 13 , access_level: 30 , project_id: 2 }
+      - { user_id: 14 , access_level: 30 , project_id: 2 }
+      - { user_id: 15 , access_level: 30 , project_id: 2 }
+      - { user_id: 16 , access_level: 30 , project_id: 2 }
+      - { user_id: 17 , access_level: 30 , project_id: 2 }
+      - { user_id: 18 , access_level: 30 , project_id: 2 }
+      - { user_id: 19 , access_level: 30 , project_id: 2 }
+      - { user_id: 20 , access_level: 30 , project_id: 2 }
+      - { user_id: 21 , access_level: 30 , project_id: 2 }
+      - { user_id: 22 , access_level: 30 , project_id: 2 }
+      - { user_id: 23 , access_level: 30 , project_id: 2 }
+      - { user_id: 24 , access_level: 30 , project_id: 2 }
+      - { user_id: 25 , access_level: 30 , project_id: 2 }
+      - { user_id: 26 , access_level: 30 , project_id: 2 }
+      - { user_id: 27 , access_level: 30 , project_id: 2 }
+      - { user_id: 28 , access_level: 30 , project_id: 2 }
+      - { user_id: 29 , access_level: 30 , project_id: 2 }
+      - { user_id: 30 , access_level: 30 , project_id: 2 }
+      - { user_id: 31 , access_level: 30 , project_id: 2 }
